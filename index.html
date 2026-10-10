@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>資處一仁 英文科第一次段考・線上互動複習測驗系統</title>
+  <meta name="description" content="資處一仁英文科第一次段考專屬線上互動練習網站，提供單字填空、文意字彙、日常情境會話、課文默寫及翻譯填空即時批改與解析。">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light" data-font-size="medium">
+
+  <!-- 背景流光光暈裝飾 -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- 頂部浮動控制導航 -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-zone">
+        <div class="brand-badge">⚡ 113學年度</div>
+        <div class="brand-titles">
+          <h1 class="main-title">資處一仁 英文科第一次段考複習</h1>
+          <span class="sub-title">Online Interactive Exam & Practice Suite</span>
+        </div>
+      </div>
+
+      <!-- 快速功能區 -->
+      <div class="header-actions">
+        <!-- 字體大小調整 -->
+        <div class="font-scale-group" title="字體大小縮放">
+          <button id="fontDecBtn" class="font-btn" title="縮小字體">A-</button>
+          <button id="fontIncBtn" class="font-btn" title="放大字體">A+</button>
+        </div>
+
+        <!-- 計時器 -->
+        <div class="timer-badge" id="timerBadge" title="考試計時">
+          <span class="timer-icon">⏱️</span>
+          <span id="timerDisplay">00:00</span>
+          <button id="toggleTimerBtn" class="timer-ctrl-btn" title="暫停/開始">⏸</button>
+        </div>
+
+        <!-- 音效開關 -->
+        <button id="sfxToggleBtn" class="icon-action-btn" title="切換音效 (已開啟)">
+          <span id="sfxIcon">🔊</span>
+        </button>
+
+        <!-- 主題切換 (深色/淺色) -->
+        <button id="themeToggleBtn" class="icon-action-btn" title="切換深淺模式">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- 列印按鈕 -->
+        <button id="printBtn" class="btn btn-secondary btn-sm" onclick="window.print()">
+          <span>🖨️ 列印考卷</span>
+        </button>
+
+        <!-- 一鍵交卷計分 -->
+        <button id="submitExamBtn" class="btn btn-primary btn-sm">
+          <span>🚀 送出批改</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 大題快捷錨點列 -->
+    <nav class="section-nav-tabs">
+      <div class="tabs-inner">
+        <a href="#section1" class="tab-link active">Part 1 單字中翻英</a>
+        <a href="#section2" class="tab-link">Part 2 文意字彙</a>
+        <a href="#section3" class="tab-link">Part 3 日常會話</a>
+        <a href="#section4" class="tab-link">Part 4 課文默寫</a>
+        <a href="#section5" class="tab-link">Part 5 翻譯填空</a>
+      </div>
+    </nav>
+
+    <!-- 浮動進度條 -->
+    <div class="exam-progress-wrap">
+      <div class="progress-info">
+        <span>作答進度：<strong id="answeredCount">0</strong> / <span id="totalBlanksCount">52</span> 格</span>
+        <span>當前完成率：<strong id="progressPercent">0%</strong></span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- 工具控制欄 -->
+    <section class="control-panel glass-panel">
+      <div class="quick-toolbar">
+        <div class="tool-tags">
+          <label class="toggle-switch-label">
+            <input type="checkbox" id="instantFeedbackToggle" checked>
+            <span class="slider"></span>
+            <span class="label-text">即時檢測模式</span>
+          </label>
+          <label class="toggle-switch-label">
+            <input type="checkbox" id="showMistakesOnlyToggle">
+            <span class="slider"></span>
+            <span class="label-text">只看答錯題目（錯題訂正）</span>
+          </label>
+        </div>
+        <div class="tool-buttons">
+          <div class="score-badge" id="headerScoreBadge">
+            <span class="score-label">即時得分：</span>
+            <span id="liveScoreNumber">--</span>
+            <span class="score-unit">/ 100</span>
+          </div>
+          <button id="showAllAnswersBtn" class="btn btn-ghost btn-sm">📖 查看所有解答</button>
+          <button id="resetAllBtn" class="btn btn-ghost btn-sm text-danger">🔄 全部清空重測</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 試卷主體 -->
+    <div class="test-paper-flow" id="testPaper">
+
+      <!-- 第一大題：單字填空 -->
+      <section class="section-card glass-panel" id="section1">
+        <div class="section-header">
+          <div class="section-badge">Part 1</div>
+          <div class="section-meta">
+            <h2>一、單字填空（中翻英）</h2>
+            <p class="section-desc">請根據中文提示，填入對應的英文單字（每題 2 分，共 20 分）。</p>
+          </div>
+          <div class="section-score-pill" id="sec1ScorePill">0 / 20 分</div>
+        </div>
+
+        <div class="vocab-grid" id="sec1Grid">
+          <!-- JS 動態生成 10 題 -->
+        </div>
+      </section>
+
+      <!-- 第二大題：文意字彙 -->
+      <section class="section-card glass-panel" id="section2">
+        <div class="section-header">
+          <div class="section-badge">Part 2</div>
+          <div class="section-meta">
+            <h2>二、文意字彙（填入適當單字）</h2>
+            <p class="section-desc">請根據句意填入最適當的單字，注意單複數與時態形式（每題 2 分，共 20 分）。</p>
+          </div>
+          <div class="section-score-pill" id="sec2ScorePill">0 / 20 分</div>
+        </div>
+
+        <div class="questions-list" id="sec2List">
+          <!-- JS 動態生成 10 題 -->
+        </div>
+      </section>
+
+      <!-- 第三大題：日常情境會話 -->
+      <section class="section-card glass-panel" id="section3">
+        <div class="section-header">
+          <div class="section-badge">Part 3</div>
+          <div class="section-meta">
+            <h2>三、日常情境會話（代號填空）</h2>
+            <p class="section-desc">請根據英文句子，於括號內填入正確中文意義的選項代號（點選下方選項卡即可快速填入，每題 2 分，共 10 分）。</p>
+          </div>
+          <div class="section-score-pill" id="sec3ScorePill">0 / 10 分</div>
+        </div>
+
+        <!-- 可點選的選項提示庫 -->
+        <div class="matching-options-bank">
+          <div class="bank-title">💡 點擊選項可快速填入當前選取的題目：</div>
+          <div class="options-pills" id="matchingOptionChips">
+            <button class="option-pill" data-key="A" type="button"><span class="opt-key">A</span> 非常感謝。</button>
+            <button class="option-pill" data-key="B" type="button"><span class="opt-key">B</span> 我感冒了。</button>
+            <button class="option-pill" data-key="C" type="button"><span class="opt-key">C</span> 很好，謝謝，你也好嗎？</button>
+            <button class="option-pill" data-key="D" type="button"><span class="opt-key">D</span> 怎麼啦？</button>
+            <button class="option-pill" data-key="E" type="button"><span class="opt-key">E</span> 你好嗎？</button>
+          </div>
+        </div>
+
+        <div class="matching-list" id="sec3List">
+          <!-- JS 動態生成 5 題 -->
+        </div>
+      </section>
+
+      <!-- 第四大題：課文默寫填空 -->
+      <section class="section-card glass-panel" id="section4">
+        <div class="section-header">
+          <div class="section-badge">Part 4</div>
+          <div class="section-meta">
+            <h2>四、課文默寫填空（短文克漏字）</h2>
+            <p class="section-desc">請根據課文短文文意，在空格處填入正確英文單字（每格 2 分，共 10 分）。</p>
+          </div>
+          <div class="section-score-pill" id="sec4ScorePill">0 / 10 分</div>
+        </div>
+
+        <div class="cloze-card">
+          <div class="cloze-text" id="sec4Passage">
+            “Happy Birthday!” These words always 
+            <span class="inline-blank-wrap" data-blank-id="s4_1">
+              <span class="blank-num">1</span>
+              <input type="text" class="cloze-input blank-input" id="s4_1" data-ans="bring" placeholder="填空" autocomplete="off" spellcheck="false">
+            </span>
+            fun and joy to people. Most birthday 
+            <span class="inline-blank-wrap" data-blank-id="s4_2">
+              <span class="blank-num">2</span>
+              <input type="text" class="cloze-input blank-input" id="s4_2" data-ans="children" placeholder="填空" autocomplete="off" spellcheck="false">
+            </span>
+            look forward to getting presents 
+            <span class="inline-blank-wrap" data-blank-id="s4_3">
+              <span class="blank-num">3</span>
+              <input type="text" class="cloze-input blank-input" id="s4_3" data-ans="and" placeholder="填空" autocomplete="off" spellcheck="false">
+            </span>
+            enjoying birthday celebrations. In fact, the ancient 
+            <span class="inline-blank-wrap" data-blank-id="s4_4">
+              <span class="blank-num">4</span>
+              <input type="text" class="cloze-input blank-input" id="s4_4" data-ans="Romans" placeholder="填空" autocomplete="off" spellcheck="false">
+            </span>
+            might be the first people to celebrate birthdays. Today, people have fun birthday traditions 
+            <span class="inline-blank-wrap" data-blank-id="s4_5">
+              <span class="blank-num">5</span>
+              <input type="text" class="cloze-input blank-input" id="s4_5" data-ans="around" placeholder="填空" autocomplete="off" spellcheck="false">
+            </span>
+            the world.
+          </div>
+          <div class="cloze-expl" id="sec4Expl" style="display:none;">
+            <strong>📝 句型與重點筆記：</strong>
+            <ul>
+              <li><strong>bring fun and joy</strong>：帶來歡樂與喜悅（動詞原型，主詞 words 為複數）。</li>
+              <li><strong>birthday children</strong>：壽星孩子們。</li>
+              <li><strong>and</strong>：對等連接詞，連接兩個動名詞 (getting presents <strong>and</strong> enjoying celebrations)。</li>
+              <li><strong>Romans</strong>：古羅馬人（專有名詞字首 R 必須大寫）。</li>
+              <li><strong>around the world</strong>：全世界。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 第五大題：翻譯填空 -->
+      <section class="section-card glass-panel" id="section5">
+        <div class="section-header">
+          <div class="section-badge">Part 5</div>
+          <div class="section-meta">
+            <h2>五、翻譯填空（依中文提示填入單字）</h2>
+            <p class="section-desc">請依中文句子在空格中填入正確字詞，一格一字（每格約 1.8 分，共 40 分）。</p>
+          </div>
+          <div class="section-score-pill" id="sec5ScorePill">0 / 40 分</div>
+        </div>
+
+        <div class="translation-list" id="sec5List">
+          <!-- JS 動態生成 10 題 (22 格) -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 底部大行動列 -->
+    <div class="bottom-action-banner glass-panel">
+      <div class="banner-summary">
+        <div class="banner-stat">
+          <span class="stat-label">完成格數</span>
+          <span class="stat-val" id="bannerCompleted">0 / 52</span>
+        </div>
+        <div class="banner-stat">
+          <span class="stat-label">目前總分</span>
+          <span class="stat-val text-primary" id="bannerScore">0 分</span>
+        </div>
+      </div>
+      <div class="banner-buttons">
+        <button id="bottomCheckBtn" class="btn btn-primary btn-lg">
+          <span>🎯 送出批改並計算總成績</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- 成果彈窗 Modal -->
+  <div class="modal-backdrop" id="resultModal">
+    <div class="modal-card glass-panel">
+      <button class="modal-close-btn" id="closeModalBtn">×</button>
+      
+      <div class="modal-trophy" id="modalTrophy">🏆</div>
+      <div class="modal-grade-badge" id="modalGradeBadge">S 等第</div>
+      <h2 class="modal-title" id="modalTitle">測驗成果結算</h2>
+      <p class="modal-subtitle" id="modalSubtitle">資處一仁 英文科第一次段考複習測驗</p>
+
+      <div class="modal-score-circle">
+        <div class="score-num" id="modalFinalScore">100</div>
+        <div class="score-denom">總分 100 分</div>
+      </div>
+
+      <div class="modal-stats-grid">
+        <div class="mstat-box">
+          <div class="mstat-num" id="modalCorrectCount">0</div>
+          <div class="mstat-label">答對格數</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-num text-danger" id="modalWrongCount">0</div>
+          <div class="mstat-label">答錯格數</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-num" id="modalAccuracy">0%</div>
+          <div class="mstat-label">答對準確率</div>
+        </div>
+        <div class="mstat-box">
+          <div class="mstat-num" id="modalTimeSpent">00:00</div>
+          <div class="mstat-label">作答耗時</div>
+        </div>
+      </div>
+
+      <div class="modal-comment-card" id="modalComment">
+        🌟 太棒了！完美全對，段考英文穩拿高分！
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalReviewMistakesBtn">🔍 複習錯題</button>
+        <button class="btn btn-secondary" id="modalCopyWrongBtn">📋 複製錯題本</button>
+        <button class="btn btn-primary" id="modalRetryBtn">🔄 重新挑戰</button>
+        <button class="btn btn-ghost" onclick="window.print()">🖨️ 列印成果成績單</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彩帶特效 Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>

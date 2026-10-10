@@ -1,0 +1,1244 @@
+/* ==========================================================================
+   資處一仁 英文科第一次段考・線上互動測驗平台 專屬樣式表
+   Design: Modern Neo-Glassmorphism, Vibrant Violet & Indigo, Dark/Light Mode
+   ========================================================================== */
+
+:root {
+  /* 淺色模式主題色 */
+  --bg-color: #f8fafc;
+  --bg-gradient: radial-gradient(circle at 10% 20%, #eff6ff 0%, #f5f3ff 40%, #fdf2f8 90%);
+  --surface-bg: rgba(255, 255, 255, 0.88);
+  --surface-border: rgba(226, 232, 240, 0.9);
+  --card-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-light: #e0e7ff;
+  --primary-glow: rgba(99, 102, 241, 0.25);
+  
+  --accent: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --success-border: #a7f3d0;
+  
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-focus: #6366f1;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --base-font-size: 15px;
+}
+
+[data-theme="dark"] {
+  --bg-color: #0b0f19;
+  --bg-gradient: radial-gradient(circle at 15% 15%, #111827 0%, #0b0f19 50%, #030712 100%);
+  --surface-bg: rgba(17, 24, 39, 0.82);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --primary: #818cf8;
+  --primary-hover: #6366f1;
+  --primary-light: rgba(99, 102, 241, 0.18);
+  --primary-glow: rgba(129, 140, 248, 0.35);
+  
+  --accent: #a78bfa;
+  
+  --success: #34d399;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --success-border: rgba(52, 211, 153, 0.3);
+  
+  --danger: #f87171;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --danger-border: rgba(248, 113, 113, 0.3);
+  
+  --warning: #fbbf24;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  
+  --input-bg: #1e293b;
+  --input-border: #334155;
+  --input-focus: #818cf8;
+}
+
+/* 字體大小縮放響應 */
+body[data-font-size="small"] { --base-font-size: 13.5px; }
+body[data-font-size="medium"] { --base-font-size: 15px; }
+body[data-font-size="large"] { --base-font-size: 17px; }
+
+/* 基礎重置 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--base-font-size);
+  background-color: var(--bg-color);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease, font-size 0.2s ease;
+  line-height: 1.6;
+}
+
+/* 背景光暈效果 */
+.bg-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-glow-1 {
+  top: -100px;
+  left: -100px;
+  background: #6366f1;
+}
+.bg-glow-2 {
+  top: 35%;
+  right: -150px;
+  background: #8b5cf6;
+}
+.bg-glow-3 {
+  bottom: -150px;
+  left: 30%;
+  background: #06b6d4;
+}
+
+/* Glassmorphism 面板通用規範 */
+.glass-panel {
+  background: var(--surface-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+/* ==========================================================================
+   Header & Floating Navigation
+   ========================================================================== */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--surface-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--surface-border);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.brand-titles .main-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+}
+
+.brand-titles .sub-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 字體縮放按鈕 */
+.font-scale-group {
+  display: inline-flex;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--input-bg);
+}
+.font-btn {
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+.font-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* 計時器微件 */
+.timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--primary-glow);
+}
+.timer-ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  font-size: 12px;
+  padding: 1px 3px;
+  border-radius: 4px;
+}
+.timer-ctrl-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+/* 圖示操作按鈕 */
+.icon-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+  background: var(--input-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.icon-action-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+/* 導航分頁籤 (Section Nav Tabs) */
+.section-nav-tabs {
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--surface-border);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.tabs-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6px 24px;
+  display: flex;
+  gap: 10px;
+}
+.tab-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  transition: all 0.2s;
+  background: transparent;
+}
+.tab-link:hover, .tab-link.active {
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* 通用按鈕元件 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+.btn-sm {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.btn-lg {
+  font-size: 16px;
+  padding: 13px 28px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-glow);
+  filter: brightness(1.06);
+}
+.btn-secondary {
+  background: var(--input-bg);
+  border-color: var(--surface-border);
+  color: var(--text-main);
+}
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover {
+  color: var(--primary);
+  background: var(--primary-light);
+}
+.text-danger {
+  color: var(--danger) !important;
+}
+
+/* 進度條 */
+.exam-progress-wrap {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.02);
+  border-top: 1px solid var(--surface-border);
+}
+.progress-info {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4px 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 4px;
+  background: rgba(203, 213, 225, 0.3);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #06b6d4, #10b981);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Main Layout & Student Card
+   ========================================================================== */
+.main-container {
+  max-width: 1060px;
+  margin: 24px auto 80px auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.control-panel {
+  padding: 18px 24px;
+  margin-bottom: 24px;
+}
+.score-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.15));
+  border: 1px solid var(--primary-glow);
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+}
+#liveScoreNumber {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--primary);
+}
+.score-unit {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* 快速開關與工具列 */
+.quick-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--surface-border);
+}
+
+.tool-tags {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* 自訂切換開關 (Switch) */
+.toggle-switch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-switch-label input {
+  display: none;
+}
+.toggle-switch-label .slider {
+  width: 34px;
+  height: 19px;
+  background-color: var(--input-border);
+  border-radius: 20px;
+  position: relative;
+  transition: background-color 0.25s;
+}
+.toggle-switch-label .slider::before {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  transition: transform 0.25s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle-switch-label input:checked + .slider {
+  background-color: var(--primary);
+}
+.toggle-switch-label input:checked + .slider::before {
+  transform: translateX(15px);
+}
+.toggle-switch-label .label-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.tool-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Section Cards & Exam Questions
+   ========================================================================== */
+.test-paper-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section-card {
+  padding: 28px;
+  position: relative;
+  scroll-margin-top: 110px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.section-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-top: 2px;
+}
+
+.section-meta {
+  flex: 1;
+}
+.section-meta h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.section-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.section-score-pill {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--primary);
+  border: 1px solid var(--primary-glow);
+  white-space: nowrap;
+}
+
+/* --- 第一大題：單字填空 Grid --- */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 14px 20px;
+}
+
+.vocab-item {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.vocab-item:hover {
+  border-color: var(--primary-glow);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.vocab-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.vocab-prompt-num {
+  font-weight: 800;
+  color: var(--primary);
+  margin-right: 6px;
+  font-size: 13px;
+}
+.vocab-prompt-zh {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-main);
+}
+.vocab-hint-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--warning);
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.vocab-hint-btn:hover {
+  background: var(--warning-bg);
+}
+
+.vocab-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+/* 填空輸入框統一樣式 */
+.exam-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  outline: none;
+  transition: all 0.2s ease;
+}
+.exam-input:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+/* 輸入框即時反饋狀態 */
+.exam-input.is-correct {
+  border-color: var(--success) !important;
+  background-color: var(--success-bg) !important;
+  color: var(--success) !important;
+}
+.exam-input.is-wrong {
+  border-color: var(--danger) !important;
+  background-color: var(--danger-bg) !important;
+  color: var(--danger) !important;
+}
+
+.vocab-feedback {
+  font-size: 12px;
+  margin-top: 2px;
+  display: none;
+  line-height: 1.4;
+}
+.vocab-feedback.show {
+  display: block;
+}
+.feedback-ans {
+  color: var(--success);
+  font-weight: 700;
+}
+.feedback-wrong {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* --- 第二大題：文意字彙 List --- */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.q-sentence-card {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  transition: all 0.2s;
+}
+.q-sentence-card:hover {
+  border-color: var(--primary-glow);
+}
+
+.q-sentence-body {
+  font-size: 15px;
+  line-height: 2.2;
+  color: var(--text-main);
+}
+.q-num {
+  font-weight: 800;
+  color: var(--primary);
+  margin-right: 6px;
+}
+
+.inline-input-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin: 0 4px;
+  vertical-align: middle;
+}
+.inline-input-wrap input {
+  width: 140px;
+  text-align: center;
+  font-weight: 700;
+  padding: 4px 10px;
+}
+
+.q-expl-box {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: rgba(99, 102, 241, 0.05);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+  display: none;
+}
+.q-expl-box.show {
+  display: block;
+}
+
+/* --- 第三大題：會話配合題 --- */
+.matching-options-bank {
+  background: var(--input-bg);
+  border: 1px dashed var(--input-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.bank-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.options-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+.option-pill {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-main);
+}
+.option-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 4px 10px var(--primary-glow);
+}
+.option-pill:active {
+  transform: scale(0.96);
+}
+.opt-key {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.matching-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.matching-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+.matching-item:hover {
+  border-color: var(--primary-glow);
+}
+.match-input {
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.match-en {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.match-ans-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success);
+  display: none;
+}
+.match-ans-label.show {
+  display: block;
+}
+
+/* --- 第四大題：短文默寫 --- */
+.cloze-card {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+}
+.cloze-text {
+  font-size: 16.5px;
+  line-height: 2.4;
+  color: var(--text-main);
+}
+.blank-num {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-light);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+.cloze-input {
+  width: 110px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  background: var(--input-bg);
+  color: var(--text-main);
+  outline: none;
+}
+.cloze-input:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+.cloze-expl {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+.cloze-expl ul {
+  padding-left: 20px;
+  margin-top: 6px;
+}
+
+/* --- 第五大題：翻譯填空 --- */
+.translation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.trans-item {
+  background: var(--surface-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  transition: all 0.2s;
+}
+.trans-item:hover {
+  border-color: var(--primary-glow);
+}
+.trans-zh {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.trans-num {
+  color: var(--primary);
+  font-weight: 800;
+}
+.trans-en {
+  font-size: 15px;
+  line-height: 2.3;
+  color: var(--text-main);
+}
+.trans-blank-wrap {
+  display: inline-flex;
+  margin: 0 3px;
+  vertical-align: middle;
+}
+.trans-input {
+  width: 105px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  background: var(--input-bg);
+  color: var(--text-main);
+  outline: none;
+}
+.trans-input:focus {
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+.trans-hint-pill {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+  display: none;
+}
+.trans-hint-pill.show {
+  display: block;
+}
+
+/* ==========================================================================
+   Bottom Action Banner
+   ========================================================================== */
+.bottom-action-banner {
+  margin-top: 32px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.banner-summary {
+  display: flex;
+  gap: 28px;
+}
+.banner-stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.stat-val {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+.text-primary {
+  color: var(--primary) !important;
+}
+
+/* ==========================================================================
+   Modal Dialog (Result & Analysis)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  max-width: 530px;
+  width: 100%;
+  padding: 36px 32px;
+  text-align: center;
+  position: relative;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-backdrop.is-open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-close-btn:hover {
+  color: var(--text-main);
+  background: var(--surface-border);
+}
+
+.modal-trophy {
+  font-size: 50px;
+  line-height: 1;
+  margin-bottom: 8px;
+  animation: bounceTrophy 1.5s infinite ease-in-out;
+}
+@keyframes bounceTrophy {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.modal-grade-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px var(--primary-glow);
+}
+
+.modal-title {
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+}
+
+.modal-score-circle {
+  margin: 0 auto 24px auto;
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-light), rgba(139, 92, 246, 0.15));
+  border: 3px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px var(--primary-glow);
+}
+.modal-score-circle .score-num {
+  font-size: 42px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  color: var(--primary);
+  line-height: 1;
+}
+.modal-score-circle .score-denom {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.modal-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.mstat-box {
+  background: var(--input-bg);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 4px;
+}
+.mstat-num {
+  font-size: 17px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+}
+.mstat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.modal-comment-card {
+  padding: 12px 18px;
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
+  color: var(--success);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 22px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Canvas Confetti
+   ========================================================================== */
+#confettiCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+/* ==========================================================================
+   Print Optimization (@media print)
+   ========================================================================== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+  }
+  .bg-glow,
+  .app-header,
+  .quick-toolbar,
+  .bottom-action-banner,
+  .modal-backdrop,
+  #confettiCanvas,
+  .vocab-hint-btn,
+  .matching-options-bank {
+    display: none !important;
+  }
+  .main-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .glass-panel {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-bottom: 20px !important;
+  }
+  .student-card {
+    border-bottom: 2px solid #000 !important;
+    padding-bottom: 12px !important;
+  }
+  .student-info-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  .section-card {
+    page-break-inside: avoid;
+    margin-bottom: 24px !important;
+  }
+  .exam-input,
+  .cloze-input,
+  .trans-input,
+  .match-input {
+    border: none !important;
+    border-bottom: 1px solid #000 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .clue-prefix {
+    border: none !important;
+    background: transparent !important;
+    color: #000 !important;
+  }
+  .section-badge {
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    background: transparent !important;
+  }
+  .q-expl-box,
+  .vocab-feedback,
+  .cloze-expl,
+  .trans-hint-pill {
+    display: none !important;
+  }
+}
+
+/* 響應式優化 */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .vocab-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .inline-input-wrap input,
+  .trans-input,
+  .cloze-input {
+    width: 95px;
+  }
+}

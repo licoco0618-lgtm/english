@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>資處一仁 英文科第一次段考複習練習卷</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 15mm;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #f8fafc;
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #2d3748;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+    .meta-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 8px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      background: #edf2f7;
+      padding: 6px 12px;
+      border-left: 4px solid #3182ce;
+      margin: 24px 0 14px 0;
+      border-radius: 2px;
+    }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 24px;
+    }
+    .q-item {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+    .cloze-passage {
+      font-size: 15px;
+      line-height: 2;
+      background: #f7fafc;
+      padding: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+    }
+    .blank {
+      display: inline-block;
+      min-width: 90px;
+      border-bottom: 1px solid #2d3748;
+      text-align: center;
+      padding: 0 4px;
+      color: #2b6cb0;
+      font-weight: 600;
+    }
+    .blank-long {
+      min-width: 130px;
+    }
+    .matching-box {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      font-size: 14px;
+    }
+    .answer-key {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 2px dashed #a0aec0;
+    }
+    .ans-badge {
+      display: inline-block;
+      color: #c53030;
+      font-weight: bold;
+      margin-right: 6px;
+    }
+    .note-text {
+      color: #718096;
+      font-size: 13px;
+      margin-left: 6px;
+    }
+    .no-print {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    .btn {
+      padding: 8px 16px;
+      background: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .btn:hover {
+      background: #2b6cb0;
+    }
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="no-print">
+      <a href="index.html" class="btn" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); text-decoration: none; color: white;">⚡ 前往線上互動測驗平台</a>
+      <button class="btn" onclick="window.print()">🖨️ 列印考卷 (Ctrl + P)</button>
+      <button class="btn" style="background:#4a5568;" onclick="toggleAnswers()">切換顯示解答</button>
+    </div>
+
+    <!-- 考卷主體 -->
+    <div class="header">
+      <h1>資處一仁 英文科第一次段考複習練習卷</h1>
+      <div class="meta-bar">
+        <span>班級：資處一仁</span>
+        <span>座號：_______</span>
+        <span>姓名：_______________</span>
+        <span>得分：_______ / 100</span>
+      </div>
+    </div>
+
+    <!-- 第一大題 -->
+    <div class="section-title">一、單字填空（中翻英）</div>
+    <div class="grid-2col">
+      <div class="q-item">1. 主題；學科：<span class="blank blank-long"></span></div>
+      <div class="q-item">2. 命令；掌握：<span class="blank blank-long"></span></div>
+      <div class="q-item">3. 街角；角落：<span class="blank blank-long"></span></div>
+      <div class="q-item">4. 電梯：<span class="blank blank-long"></span></div>
+      <div class="q-item">5. 包裹：<span class="blank blank-long"></span></div>
+      <div class="q-item">6. 結果：<span class="blank blank-long"></span></div>
+      <div class="q-item">7. 目的：<span class="blank blank-long"></span></div>
+      <div class="q-item">8. 驚訝：<span class="blank blank-long"></span></div>
+      <div class="q-item">9. 請求；要求：<span class="blank blank-long"></span></div>
+      <div class="q-item">10. 關係：<span class="blank blank-long"></span></div>
+    </div>
+
+    <!-- 第二大題 -->
+    <div class="section-title">二、文意字彙（填入適當單字）</div>
+    <div class="q-item">1. Tom seldom talks about his <span class="blank blank-long"></span> life, so I don't know much about him.</div>
+    <div class="q-item">2. Let me <span class="blank blank-long"></span> myself. My name is Andy.</div>
+    <div class="q-item">3. The reading club has six <span class="blank blank-long"></span>. They meet once a month.</div>
+    <div class="q-item">4. Everyone needs to show <span class="blank blank-long"></span> for their parents.</div>
+    <div class="q-item">5. Henry didn't prepare for the test. <span class="blank blank-long"></span>, he didn't pass it.</div>
+    <div class="q-item">6. For Chinese people, the color red is a <span class="blank blank-long"></span> of luck.</div>
+    <div class="q-item">7. Julia and her boyfriend are <span class="blank blank-long"></span> to get married next year.</div>
+    <div class="q-item">8. Emily followed the family <span class="blank blank-long"></span> and became a cook.</div>
+    <div class="q-item">9. My grandma enjoys learning computer <span class="blank blank-long"></span>.</div>
+    <div class="q-item">10. The man <span class="blank blank-long"></span> everyone at the party with his funny tricks.</div>
+
+    <!-- 第三大題 -->
+    <div class="section-title">三、情境會話配合（填入選項代號）</div>
+    <div class="matching-box">
+      <div><strong>A.</strong> 非常感謝。</div>
+      <div><strong>B.</strong> 我感冒了。</div>
+      <div><strong>C.</strong> 很好，謝謝，你也好嗎？</div>
+      <div><strong>D.</strong> 怎麼啦？</div>
+      <div><strong>E.</strong> 你好嗎？</div>
+    </div>
+    <div class="q-item">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) 1. Fine, thank you. And how are you?</div>
+    <div class="q-item">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) 2. How are you?</div>
+    <div class="q-item">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) 3. I've caught a cold.</div>
+    <div class="q-item">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) 4. I appreciate it.</div>
+    <div class="q-item">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ) 5. What's wrong with you?</div>
+
+    <!-- 第四大題 -->
+    <div class="section-title">四、課文默寫填空</div>
+    <div class="cloze-passage">
+      “Happy Birthday!” These words always <strong>1.</strong> <span class="blank blank-long"></span> fun and joy to people. Most birthday <strong>2.</strong> <span class="blank blank-long"></span> look forward to getting presents <strong>3.</strong> <span class="blank blank-long"></span> enjoying birthday celebrations. In fact, the ancient <strong>4.</strong> <span class="blank blank-long"></span> might be the first people to celebrate birthdays. Today, people have fun birthday traditions <strong>5.</strong> <span class="blank blank-long"></span> the world.
+    </div>
+
+    <!-- 第五大題 -->
+    <div class="section-title">五、翻譯填空</div>
+    <div class="q-item">
+      1. 那名演員穿上他的戲服，然後走上舞臺。<br>
+      &nbsp;&nbsp;&nbsp;The actor put on his <span class="blank"></span> and walked on to the <span class="blank"></span>.
+    </div>
+    <div class="q-item">
+      2. 除了英文之外，John 還會說日文和韓文。<br>
+      &nbsp;&nbsp;&nbsp;<span class="blank"></span> <span class="blank"></span> <span class="blank"></span> English, John can speak Japanese and Korean.
+    </div>
+    <div class="q-item">
+      3. Karen 擅長烹飪。事實上，她正計畫要開一間小餐館。<br>
+      &nbsp;&nbsp;&nbsp;Karen is good at cooking. <span class="blank"></span> <span class="blank"></span>, she is planning to open a small restaurant.
+    </div>
+    <div class="q-item">
+      4. 短暫休息後，我們準備好繼續前進。<br>
+      &nbsp;&nbsp;&nbsp;After a short break, we were ready to <span class="blank"></span> <span class="blank"></span>.
+    </div>
+    <div class="q-item">
+      5. 請隨意在房子四處參觀。<br>
+      &nbsp;&nbsp;&nbsp;Please feel free to <span class="blank"></span> <span class="blank"></span> the house.
+    </div>
+    <div class="q-item">
+      6. 小男孩等不及要吹熄他生日蛋糕上的蠟燭。<br>
+      &nbsp;&nbsp;&nbsp;The little boy couldn't wait to <span class="blank"></span> <span class="blank"></span> the candles on his birthday cake.
+    </div>
+    <div class="q-item">
+      7. Nancy 打開電風扇來驅逐蒼蠅。<br>
+      &nbsp;&nbsp;&nbsp;Nancy turned on the fan to <span class="blank"></span> the flies <span class="blank"></span>.
+    </div>
+    <div class="q-item">
+      8. 我們的花園裡有不同種類的花，例如玫瑰和百合。<br>
+      &nbsp;&nbsp;&nbsp;There are different kinds of flowers in our garden. <span class="blank"></span> <span class="blank"></span>, we have roses and lilies.
+    </div>
+    <div class="q-item">
+      9. 所有球員都應該按照規則進行籃球賽。<br>
+      &nbsp;&nbsp;&nbsp;All of the players should play the basketball game <span class="blank"></span> <span class="blank"></span> the rules.
+    </div>
+    <div class="q-item">
+      10. 我們很期待見到你。<br>
+      &nbsp;&nbsp;&nbsp;We <span class="blank"></span> <span class="blank"></span> <span class="blank"></span> seeing you.
+    </div>
+
+    <!-- 解答區塊 -->
+    <div id="answersSection" class="answer-key page-break">
+      <div class="header">
+        <h1>【參考答案與解析】</h1>
+      </div>
+
+      <div class="section-title">一、單字填空</div>
+      <div class="grid-2col">
+        <div>1. <span class="ans-badge">subject</span> (主題；學科)</div>
+        <div>2. <span class="ans-badge">command</span> (命令；掌握)</div>
+        <div>3. <span class="ans-badge">corner</span> (街角；角落)</div>
+        <div>4. <span class="ans-badge">elevator</span> (電梯)</div>
+        <div>5. <span class="ans-badge">package</span> (包裹)</div>
+        <div>6. <span class="ans-badge">result</span> (結果)</div>
+        <div>7. <span class="ans-badge">purpose</span> (目的)</div>
+        <div>8. <span class="ans-badge">surprise</span> (驚訝)</div>
+        <div>9. <span class="ans-badge">request</span> (請求；要求)</div>
+        <div>10. <span class="ans-badge">relation</span> (關係)</div>
+      </div>
+
+      <div class="section-title">二、文意字彙</div>
+      <ol style="padding-left: 20px; line-height: 1.8;">
+        <li><span class="ans-badge">personal</span> <span class="note-text">(個人的；personal life 個人生活)</span></li>
+        <li><span class="ans-badge">introduce</span> <span class="note-text">(介紹；introduce myself 自我介紹)</span></li>
+        <li><span class="ans-badge">members</span> <span class="note-text">(成員；有 6 位需用複數 members)</span></li>
+        <li><span class="ans-badge">respect</span> <span class="note-text">(尊重；show respect for...)</span></li>
+        <li><span class="ans-badge">Therefore</span> <span class="note-text">(因此；句首 T 大寫)</span></li>
+        <li><span class="ans-badge">symbol</span> <span class="note-text">(象徵；a symbol of luck)</span></li>
+        <li><span class="ans-badge">likely</span> <span class="note-text">(可能的；be likely to + 原形動詞)</span></li>
+        <li><span class="ans-badge">tradition</span> <span class="note-text">(傳統；名詞，家族傳統 family tradition)</span></li>
+        <li><span class="ans-badge">skills</span> <span class="note-text">(技能；電腦技能 computer skills)</span></li>
+        <li><span class="ans-badge">impressed</span> <span class="note-text">(使...留下深刻印象；過去式加 ed)</span></li>
+      </ol>
+
+      <div class="section-title">三、情境會話配合</div>
+      <div class="grid-2col">
+        <div>1. <span class="ans-badge">C</span> (很好，謝謝，你也好嗎？)</div>
+        <div>2. <span class="ans-badge">E</span> (你好嗎？)</div>
+        <div>3. <span class="ans-badge">B</span> (我感冒了。)</div>
+        <div>4. <span class="ans-badge">A</span> (非常感謝。)</div>
+        <div>5. <span class="ans-badge">D</span> (怎麼啦？)</div>
+      </div>
+
+      <div class="section-title">四、課文默寫填空</div>
+      <ol style="padding-left: 20px; line-height: 1.8;">
+        <li><span class="ans-badge">bring</span> <span class="note-text">(bring fun and joy 帶來樂趣與喜悅)</span></li>
+        <li><span class="ans-badge">children</span> <span class="note-text">(birthday children 壽星孩子們)</span></li>
+        <li><span class="ans-badge">and</span> <span class="note-text">(對等連接詞，連接兩個動名詞片語)</span></li>
+        <li><span class="ans-badge">Romans</span> <span class="note-text">(古羅馬人；專有名詞首字大寫)</span></li>
+        <li><span class="ans-badge">around</span> <span class="note-text">(around the world 全世界)</span></li>
+      </ol>
+
+      <div class="section-title">五、翻譯填空</div>
+      <ol style="padding-left: 20px; line-height: 2;">
+        <li><span class="ans-badge">costume</span> / <span class="ans-badge">stage</span></li>
+        <li><span class="ans-badge">In</span> <span class="ans-badge">addition</span> <span class="ans-badge">to</span></li>
+        <li><span class="ans-badge">In</span> <span class="ans-badge">fact</span></li>
+        <li><span class="ans-badge">move</span> <span class="ans-badge">on</span></li>
+        <li><span class="ans-badge">look</span> <span class="ans-badge">around</span></li>
+        <li><span class="ans-badge">blow</span> <span class="ans-badge">out</span></li>
+        <li><span class="ans-badge">keep</span> ... <span class="ans-badge">away</span></li>
+        <li><span class="ans-badge">For</span> <span class="ans-badge">example</span></li>
+        <li><span class="ans-badge">according</span> <span class="ans-badge">to</span></li>
+        <li><span class="ans-badge">look</span> <span class="ans-badge">forward</span> <span class="ans-badge">to</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    function toggleAnswers() {
+      const el = document.getElementById('answersSection');
+      if (el.style.display === 'none') {
+        el.style.display = 'block';
+      } else {
+        el.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
